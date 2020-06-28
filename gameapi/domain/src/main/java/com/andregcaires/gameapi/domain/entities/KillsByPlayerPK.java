@@ -3,9 +3,10 @@ package com.andregcaires.gameapi.domain.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,12 +17,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class KillsByPlayer implements Serializable {
-	
+public class KillsByPlayerPK implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
+	@JoinColumn(name = "player_id")
+	private Player player;
 	
-	private KillsByPlayerPK id = new KillsByPlayerPK();
+	@ManyToOne
+	@JoinColumn(name = "game_id")
+	private Game game;	
 	
-	private long kills;
 	
 }

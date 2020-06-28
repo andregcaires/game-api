@@ -5,8 +5,10 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.andregcaires.gameapi.context.repositories.PlayerRepository;
 import com.andregcaires.gameapi.core.interfaces.IPlayerService;
 import com.andregcaires.gameapi.domain.entities.Player;
 
@@ -14,6 +16,9 @@ import com.andregcaires.gameapi.domain.entities.Player;
 public class PlayerService implements IPlayerService {
 	
 	private final String lineSeparator = "\\";
+	
+	@Autowired
+	private PlayerRepository repository;
 	
 	Logger logger = LoggerFactory.getLogger(PlayerService.class);
 
@@ -25,13 +30,29 @@ public class PlayerService implements IPlayerService {
     			.replaceAll(Pattern.quote(lineSeparator), "\\\\")
     			.split("\\\\");
     	
-    	// TODO change to repository call
-    	var clientUserInfo = Player.builder()
-    			.name(splitUpLineArray[1])
-    			.build();
+    	var foundPlayerName = splitUpLineArray[1];
     	
-    	logger.info("Game has been captured from log file: "+ clientUserInfo.toString());
-    	System.out.println(clientUserInfo.toString());
-    	return clientUserInfo;
+    	var player = findPlayerByName(foundPlayerName);
+    	
+    	if (player == null) {
+    		
+    		player = Player.builder()
+    				.name(foundPlayerName)
+    				.build();
+    		
+    		player = insertNewPlayer(player);
+    	}    	
+    	
+    	logger.info("Game has been captured from log file: "+ player.toString());
+    	System.out.println(player.toString());
+    	return player;
+	}
+	
+	public Player findPlayerByName(String playerName) {
+		return repository.findByName(playerName);
+	}
+	
+	public Player insertNewPlayer(Player player) {
+		return repository.save(player);
 	}
 }
