@@ -1,0 +1,4 @@
+
+Fazer o conjunto de players e de players X kill como ElementCollection
+https://stackoverflow.com/questions/3393649/storing-a-mapstring-string-using-jpa
+

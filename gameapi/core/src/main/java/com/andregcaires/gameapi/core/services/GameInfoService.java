@@ -7,29 +7,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.andregcaires.gameapi.core.interfaces.IGameService;
-import com.andregcaires.gameapi.domain.entities.Game;
+import com.andregcaires.gameapi.core.interfaces.IGameInfoService;
+import com.andregcaires.gameapi.domain.entities.GameInfo;
 
 @Service
-public class GameService implements IGameService {
+public class GameInfoService implements IGameInfoService {
 	
-	private final String initGameLineSeparator = "\\";
+	private final String lineSeparator = "\\";
 	
-	Logger logger = LoggerFactory.getLogger(GameService.class);
+	Logger logger = LoggerFactory.getLogger(GameInfoService.class);
 
-	public Game buildGame(String initGameLine) {
+	public GameInfo buildGame(String line) {
 		
 		var map = new HashMap<String, String>();
 		
-    	var initGameProperties = initGameLine
-    			.replaceAll(Pattern.quote(initGameLineSeparator), "\\\\")
+    	var splitUpLineArray = line
+    			.replaceAll(Pattern.quote(lineSeparator), "\\\\")
     			.split("\\\\");
     	
-    	for (int i = 1; i < initGameProperties.length; i += 2) {    
-    		map.put(initGameProperties[i], initGameProperties[i + 1]);   
+    	for (int i = 1; i < splitUpLineArray.length; i += 2) {    
+    		map.put(splitUpLineArray[i], splitUpLineArray[i + 1]);   
     	}
     	
-    	var game = Game.builder()
+    	var gameInfo = GameInfo.builder()
     			.needPass(map.get("g_needpass") == "1")
     			.gameName(map.get("gamename"))
     			.mapName(map.get("mapname"))
@@ -52,8 +52,8 @@ public class GameService implements IGameService {
     			.captureLimit(Integer.parseInt(map.get("capturelimit")))
     			.build();
     	
-    	logger.info("Game has been captured from log file: "+ game.toString());
+    	logger.info("Game has been captured from log file: "+ gameInfo.toString());
 		
-		return game;
+		return gameInfo;
 	}
 }

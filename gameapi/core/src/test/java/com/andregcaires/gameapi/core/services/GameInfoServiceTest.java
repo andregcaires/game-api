@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 //import com.andregcaires.gameapi.core.configurations.ServiceConfig;
-import com.andregcaires.gameapi.core.interfaces.IGameService;
+import com.andregcaires.gameapi.core.interfaces.IGameInfoService;
 
 //@ContextConfiguration(classes = ServiceConfig.class)
-public class GameServiceTest {
+public class GameInfoServiceTest {
 	
 	@Autowired
-	private IGameService gameService;
+	private IGameInfoService gameService;
 	
 	@Test
 	public void getLogStringAndBuildGame() {

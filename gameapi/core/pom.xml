@@ -29,7 +29,11 @@
 			<artifactId>domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.andregcaires.gameapi</groupId>
+			<artifactId>context</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 		   <groupId>org.projectlombok</groupId>
 		   <artifactId>lombok</artifactId>

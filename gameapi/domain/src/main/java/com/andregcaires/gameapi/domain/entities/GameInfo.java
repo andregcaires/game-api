@@ -12,7 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Game {
+public class GameInfo {
 
 	private String floodProtect;
 	
