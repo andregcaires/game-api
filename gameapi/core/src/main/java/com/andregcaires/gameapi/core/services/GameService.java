@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.andregcaires.gameapi.context.repositories.GameRepository;
+import com.andregcaires.gameapi.core.exceptions.ObjectNotFoundException;
 import com.andregcaires.gameapi.core.interfaces.IGameService;
 import com.andregcaires.gameapi.domain.entities.Game;
 import com.andregcaires.gameapi.domain.entities.KillsByPlayer;
@@ -39,5 +40,11 @@ public class GameService implements IGameService {
 	
 	public Game insert(Game game) {
 		return gameRepository.save(game);
+	}
+	
+	public Game findById(Long id) {
+		return gameRepository.findById(id).orElseThrow(() -> {
+			throw new ObjectNotFoundException("Object not found: "+ id + " Type: "+ Game.class);
+		});
 	}
 }

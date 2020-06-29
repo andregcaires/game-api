@@ -39,12 +39,6 @@ public class Player implements Serializable {
 	
 	@NotNull
 	@Column(unique = true)
-	private String name;
-	
-//	@Singular
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "id.player", fetch = FetchType.EAGER)
-//	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
-	
+	private String name;	
 	
 }

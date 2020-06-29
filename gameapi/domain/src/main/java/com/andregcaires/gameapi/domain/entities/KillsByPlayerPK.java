@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
-@Embeddable
+//@Embeddable
 @Data
 public class KillsByPlayerPK implements Serializable {
 
@@ -22,6 +22,7 @@ public class KillsByPlayerPK implements Serializable {
 	@ToString.Exclude
 	private Player player;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	@ToString.Exclude

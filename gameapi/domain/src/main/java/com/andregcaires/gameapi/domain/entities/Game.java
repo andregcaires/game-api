@@ -43,9 +43,8 @@ public class Game implements Serializable {
 		inverseJoinColumns = @JoinColumn(name = "player_id"))
 	private Set<Player> players = new HashSet<>();
 	
-	@JsonIgnore
 	@Singular
-	@OneToMany(mappedBy = "id.game")
+	@OneToMany(mappedBy = "game")
 	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
 	
 	private long totalKills;

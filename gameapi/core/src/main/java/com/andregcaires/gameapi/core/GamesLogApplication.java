@@ -53,8 +53,7 @@ public class GamesLogApplication implements IGamesLogApplication {
 		List<KillsByPlayer> killsByPlayerList = new ArrayList<>();
 		Set<Player> playerList = new HashSet<>();
 		
-		GameInfo gameInfo;
-		
+		GameInfo gameInfo = new GameInfo();;
 		InputStream inputStream;
 		
 		try {
@@ -81,14 +80,14 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            	}
 		            }
 		            else if (line.contains(Keys.KILL)) {
-		            	var kill = killService.getKillRecord(line);
-		            	killsList.add(kill);
+		            	killsList.add(killService.getKillRecord(line));
 		            }
 		            else if (line.contains(Keys.SHUTDOWNGAME)) {
 		            	
 		            	logger.info("A game has been shutdown");
 		            	
-		            	var totalGameKillsWrapper = killService.getTotalAndIndividualKills(playerList, killsList);
+		            	var totalGameKillsWrapper = killService
+		            			.getTotalAndIndividualKills(playerList, killsList);
 		            	
 		            	var totalGameKills = totalGameKillsWrapper.getKillsByPlayerList();
 		            	
@@ -96,22 +95,14 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            			totalGameKills, 
 		            			totalGameKillsWrapper.getTotalKills());
 		            	
-		            	totalGameKills.forEach(item -> item.getId().setGame(game));
-		            	//totalGameKills.forEach(item -> item.setGame(game));
+		            	totalGameKills.forEach(item -> item.setGame(game));
+		            	
+		            	gameInfo.setGame(game);
 		            	
 		            	// Save both game and kills by player
-		            	try {
-		            		var teste = gameService.insert(game);
-		            		System.out.println(teste);
-			            	var teste2 = killService.insert(totalGameKills);
-			            	System.out.println(teste2);
-		            	} catch(Exception e) {
-		            		e.printStackTrace();
-		            		logger.error(e.getStackTrace().toString());
-		            		logger.error(e.getMessage());
-		            	}
-
-		            	
+	            		gameService.insert(game);
+		            	killService.insert(totalGameKills);
+		            	gameInfoService.insert(gameInfo);
 		            	
 		            	// Clears lists used for current game
 		            	killsByPlayerList.clear();

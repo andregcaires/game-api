@@ -65,7 +65,7 @@ public class KillService implements IKillService {
     		
     		var killsByPlayer = new KillsByPlayer();
     		
-    		killsByPlayer.getId().setPlayer(player);
+    		killsByPlayer.setPlayer(player);
     		killsByPlayer.setKills(individualKills);
     		
     		killsByPlayerList.add(killsByPlayer);
@@ -80,12 +80,11 @@ public class KillService implements IKillService {
     	var totalGameKills = new TotalGameKillsWrapper();
     	totalGameKills.getKillsByPlayerList().addAll(killsByPlayerList);
     	totalGameKills.setTotalKills(totalKills);
-    	System.out.println(totalGameKills);
+    	
     	return totalGameKills;
 	}
 	
 	public List<KillsByPlayer> insert(List<KillsByPlayer> list) {
-		list.forEach(System.out::println);
 		return killRepository.saveAll(list);
 	}
 	

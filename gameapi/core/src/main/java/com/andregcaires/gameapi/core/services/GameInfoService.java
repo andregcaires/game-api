@@ -5,13 +5,20 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.andregcaires.gameapi.context.repositories.GameInfoRepository;
+import com.andregcaires.gameapi.core.exceptions.ObjectNotFoundException;
 import com.andregcaires.gameapi.core.interfaces.IGameInfoService;
+import com.andregcaires.gameapi.domain.entities.Game;
 import com.andregcaires.gameapi.domain.entities.GameInfo;
 
 @Service
 public class GameInfoService implements IGameInfoService {
+	
+	@Autowired
+	private GameInfoRepository gameInfoRepository;
 	
 	private final String lineSeparator = "\\";
 	
@@ -55,5 +62,15 @@ public class GameInfoService implements IGameInfoService {
     	logger.info("Game has been captured from log file: "+ gameInfo.toString());
 		
 		return gameInfo;
+	}
+	
+	public GameInfo insert(GameInfo gameInfo) {
+		return gameInfoRepository.save(gameInfo);
+	}
+	
+	public GameInfo findByGameId(Long id) {
+		return gameInfoRepository.findByGame_Id(id).orElseThrow(() -> {
+			throw new ObjectNotFoundException("Object not found: "+ id + " Type: "+ GameInfo.class);
+		});
 	}
 }
