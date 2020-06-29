@@ -1,4 +1,4 @@
-package com.andregcaires.gameapi.core.services;
+package com.andregcaires.gameapi.core;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,18 +45,15 @@ public class GamesLogApplication implements IGamesLogApplication {
 	@Autowired
 	private IGameService gameService;
 	
-	private final String WORLD = "<world>";
-	
 	Logger logger = LoggerFactory.getLogger(GamesLogApplication.class);
 
 	public void parser() {
 		
-		GameInfo gameInfo;
 		List<Kill> killsList = new ArrayList<>();
 		List<KillsByPlayer> killsByPlayerList = new ArrayList<>();
 		Set<Player> playerList = new HashSet<>();
 		
-		//Map<String, Long> killsByPlayer = new HashMap<String, Long>();
+		GameInfo gameInfo;
 		
 		InputStream inputStream;
 		
@@ -93,10 +90,27 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            	
 		            	var totalGameKillsWrapper = killService.getKillsByPlayerList(playerList, killsList);
 		            	
+		            	var totalGameKills = totalGameKillsWrapper.getKillsByPlayerList();
+		            	
 		            	// TODO salva Game
-		            	gameService.createNewGame(playerList, 
-		            			totalGameKillsWrapper.getKillsByPlayerList(), 
+		            	var game = gameService.createNewGame(playerList, 
+		            			totalGameKills, 
 		            			totalGameKillsWrapper.getTotalKills());
+		            	
+		            	totalGameKills.forEach(item -> item.getId().setGame(game));
+		            	
+		            	try {
+		            		var teste = gameService.insert(game);
+		            		System.out.println(teste);
+			            	var teste2 = killService.insert(totalGameKills);
+			            	System.out.println(teste2);
+		            	} catch(Exception e) {
+		            		e.printStackTrace();
+		            		logger.error(e.getStackTrace().toString());
+		            		logger.error(e.getMessage());
+		            	}
+
+		            	
 		            	
 		            	// Clears lists used for current game
 		            	killsByPlayerList.clear();

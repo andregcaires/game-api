@@ -1,17 +1,10 @@
 package com.andregcaires.gameapi.domain.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter @Setter 
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
-@ToString
 public class GameInfo {
 
 	private String floodProtect;

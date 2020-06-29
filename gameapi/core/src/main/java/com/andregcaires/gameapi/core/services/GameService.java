@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.andregcaires.gameapi.context.repositories.GameRepository;
@@ -16,22 +17,23 @@ import com.andregcaires.gameapi.domain.entities.Player;
 @Service
 public class GameService implements IGameService {
 
-	//@Autowired
+	@Autowired
 	private GameRepository gameRepository;
 	
 	Logger logger = LoggerFactory.getLogger(GameService.class);
 	
-	public void createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills) {
+	public Game createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills) {
 		
-		Game g = Game.builder()
+		var game = Game.builder()
 				.totalKills(totalKills)
-				.killsByPlayers(killsByPlayers)
+				//.killsByPlayers(killsByPlayers)
 				.players(players)
 				.build();
 		
-		// TODO save game
-		
-		System.out.println(g.toString());
-		System.out.println("-----");
+		return game;
+	}
+	
+	public Game insert(Game game) {
+		return gameRepository.save(game);
 	}
 }

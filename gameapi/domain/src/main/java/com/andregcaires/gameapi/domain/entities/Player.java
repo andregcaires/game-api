@@ -8,33 +8,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Getter @Setter 
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString
-@EqualsAndHashCode
 public class Player implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 	
 	@NotNull
 	@Column(unique = true)
 	private String name;
+	
+//	@Singular
+//	@OneToMany(mappedBy = "id.player", fetch = FetchType.EAGER)
+//	@JsonIgnore
+//	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
+	
+//	@Singular
+//	@ManyToMany(mappedBy = "players", fetch = FetchType.EAGER)
+//	@JsonIgnore
+//	private Set<Game> games = new HashSet<>();
+	
 	
 }

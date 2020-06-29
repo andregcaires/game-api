@@ -5,11 +5,14 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.andregcaires.gameapi.domain.entities.Game;
 import com.andregcaires.gameapi.domain.entities.KillsByPlayer;
 import com.andregcaires.gameapi.domain.entities.Player;
 
 @Service
 public interface IGameService {
 
-	void createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills);
+	Game createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills);
+	
+	Game insert(Game game);
 }

@@ -6,8 +6,10 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.andregcaires.gameapi.context.repositories.KillRepository;
 import com.andregcaires.gameapi.core.interfaces.IKillService;
 import com.andregcaires.gameapi.domain.entities.Kill;
 import com.andregcaires.gameapi.domain.entities.KillsByPlayer;
@@ -20,6 +22,9 @@ public class KillService implements IKillService {
 	private final String WORLD = "<world>";
 	
 	Logger logger = LoggerFactory.getLogger(KillService.class);
+	
+	@Autowired
+	private KillRepository killRepository;
 
 	public Kill getKillRecord(String line) {
 		
@@ -73,10 +78,15 @@ public class KillService implements IKillService {
     	 * and total kills by player
     	 * */
     	var totalGameKills = new TotalGameKillsWrapper();
-    	totalGameKills.setKillsByPlayerList(killsByPlayerList);
+    	totalGameKills.getKillsByPlayerList().addAll(killsByPlayerList);
     	totalGameKills.setTotalKills(totalKills);
     	
     	return totalGameKills;
+	}
+	
+	public List<KillsByPlayer> insert(List<KillsByPlayer> list) {
+		list.forEach(System.out::println);
+		return killRepository.saveAll(list);
 	}
 	
 	private long getTotalPlayerKills(String playerName, List<Kill> killsList) {
