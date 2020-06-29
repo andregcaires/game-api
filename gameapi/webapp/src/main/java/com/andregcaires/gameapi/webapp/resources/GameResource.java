@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.andregcaires.gameapi.core.interfaces.IGameService;
+import com.andregcaires.gameapi.core.interfaces.IKillService;
 
 @RestController
 @RequestMapping(value = {"/games"})
@@ -14,6 +15,9 @@ public class GameResource {
 
 	@Autowired
 	private IGameService gameService;
+	
+	@Autowired
+	private IKillService killService;
 	
 	@RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
 	public ResponseEntity<?> getAll() {

@@ -19,13 +19,11 @@ public class KillsByPlayerPK implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "player_id")
-	//@JsonIgnoreProperties("killsByPlayers")
 	@ToString.Exclude
 	private Player player;
 	
 	@ManyToOne
 	@JoinColumn(name = "game_id")
-	@JsonIgnore
 	@ToString.Exclude
 	private Game game;	
 	

@@ -97,6 +97,7 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            			totalGameKillsWrapper.getTotalKills());
 		            	
 		            	totalGameKills.forEach(item -> item.getId().setGame(game));
+		            	//totalGameKills.forEach(item -> item.setGame(game));
 		            	
 		            	// Save both game and kills by player
 		            	try {

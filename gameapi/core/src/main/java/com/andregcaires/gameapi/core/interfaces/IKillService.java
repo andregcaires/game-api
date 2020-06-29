@@ -18,4 +18,5 @@ public interface IKillService {
 	TotalGameKillsWrapper getTotalAndIndividualKills(Set<Player> playerList, List<Kill> killsList);
 	
 	List<KillsByPlayer> insert(List<KillsByPlayer> list);
+	List<KillsByPlayer> findAll();
 }

@@ -103,4 +103,9 @@ public class KillService implements IKillService {
 						&& t.getKillerPlayer().equals(WORLD))
 				.count();
 	}
+
+	@Override
+	public List<KillsByPlayer> findAll() {
+		return killRepository.findAll();
+	}
 }

@@ -35,17 +35,17 @@ public class Game implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonManagedReference
 	@Singular
 	@ManyToMany
 	@JoinTable(name = "game_player", 
 		joinColumns = @JoinColumn(name = "game_id"), 
 		inverseJoinColumns = @JoinColumn(name = "player_id"))
-	@JsonIgnore
 	private Set<Player> players = new HashSet<>();
 	
+	@JsonIgnore
 	@Singular
 	@OneToMany(mappedBy = "id.game")
-	@JsonManagedReference
 	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
 	
 	private long totalKills;
