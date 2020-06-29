@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,10 +43,11 @@ public class Game implements Serializable {
 	@JsonIgnore
 	private Set<Player> players = new HashSet<>();
 	
-//	@Singular
-//	@OneToMany(mappedBy = "id.game")
-//	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
-//	
+	@Singular
+	@OneToMany(mappedBy = "id.game")
+	@JsonManagedReference
+	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
+	
 	private long totalKills;
 
 }

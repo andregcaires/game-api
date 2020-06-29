@@ -88,17 +88,17 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            	
 		            	logger.info("A game has been shutdown");
 		            	
-		            	var totalGameKillsWrapper = killService.getKillsByPlayerList(playerList, killsList);
+		            	var totalGameKillsWrapper = killService.getTotalAndIndividualKills(playerList, killsList);
 		            	
 		            	var totalGameKills = totalGameKillsWrapper.getKillsByPlayerList();
 		            	
-		            	// TODO salva Game
 		            	var game = gameService.createNewGame(playerList, 
 		            			totalGameKills, 
 		            			totalGameKillsWrapper.getTotalKills());
 		            	
 		            	totalGameKills.forEach(item -> item.getId().setGame(game));
 		            	
+		            	// Save both game and kills by player
 		            	try {
 		            		var teste = gameService.insert(game);
 		            		System.out.println(teste);

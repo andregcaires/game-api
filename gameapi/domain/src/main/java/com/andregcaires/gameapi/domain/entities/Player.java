@@ -15,12 +15,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Player implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,11 +35,6 @@ public class Player implements Serializable {
 	@NotNull
 	@Column(unique = true)
 	private String name;
-	
-//	@Singular
-//	@OneToMany(mappedBy = "id.player", fetch = FetchType.EAGER)
-//	@JsonIgnore
-//	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
 	
 //	@Singular
 //	@ManyToMany(mappedBy = "players", fetch = FetchType.EAGER)

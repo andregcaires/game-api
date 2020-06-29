@@ -22,6 +22,10 @@ public class GameService implements IGameService {
 	
 	Logger logger = LoggerFactory.getLogger(GameService.class);
 	
+	public List<Game> findAll() {
+		return gameRepository.findAll();
+	}
+	
 	public Game createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills) {
 		
 		var game = Game.builder()

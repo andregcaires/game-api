@@ -43,7 +43,7 @@ public class KillService implements IKillService {
 		return kill;		
 	}
 	
-	public TotalGameKillsWrapper getKillsByPlayerList(Set<Player> playerList, List<Kill> killsList) {
+	public TotalGameKillsWrapper getTotalAndIndividualKills(Set<Player> playerList, List<Kill> killsList) {
 		
 		long individualKills = 0, totalKills = 0;
 		
@@ -80,7 +80,7 @@ public class KillService implements IKillService {
     	var totalGameKills = new TotalGameKillsWrapper();
     	totalGameKills.getKillsByPlayerList().addAll(killsByPlayerList);
     	totalGameKills.setTotalKills(totalKills);
-    	
+    	System.out.println(totalGameKills);
     	return totalGameKills;
 	}
 	

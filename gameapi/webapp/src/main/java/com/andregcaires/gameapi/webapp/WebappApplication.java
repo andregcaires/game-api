@@ -13,7 +13,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.andregcaires.gameapi.core.interfaces.IGamesLogApplication;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.andregcaires.gameapi.core", "com.andregcaires.gameapi.context.repositories"})
+@ComponentScan(basePackages = {"com.andregcaires.gameapi.core", 
+		"com.andregcaires.gameapi.webapp.resources",
+		"com.andregcaires.gameapi.context.repositories"})
 @EntityScan(basePackages = {"com.andregcaires.gameapi.domain"})
 @EnableJpaRepositories(basePackages = {"com.andregcaires.gameapi.context.repositories"})
 public class WebappApplication implements CommandLineRunner {
@@ -32,6 +34,7 @@ public class WebappApplication implements CommandLineRunner {
 		try {
 			logger.info("Initializing application...");
 			gamesLogApplication.parser();
+			logger.info("Parsing process complete");
 		} catch(Exception err) {
 			logger.error("An error has ocurred: "+ err.getMessage());
 		}

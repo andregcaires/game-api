@@ -15,4 +15,6 @@ public interface IGameService {
 	Game createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills);
 	
 	Game insert(Game game);
+	
+	List<Game> findAll();
 }
