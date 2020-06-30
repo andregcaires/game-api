@@ -1,6 +1,8 @@
 package com.andregcaires.gameapi.core.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.andregcaires.gameapi.context.repositories.GameRepository;
 import com.andregcaires.gameapi.core.exceptions.ObjectNotFoundException;
 import com.andregcaires.gameapi.core.interfaces.IGameService;
+import com.andregcaires.gameapi.domain.dto.GameDto;
 import com.andregcaires.gameapi.domain.entities.Game;
 import com.andregcaires.gameapi.domain.entities.KillsByPlayer;
 import com.andregcaires.gameapi.domain.entities.Player;
@@ -42,9 +45,41 @@ public class GameService implements IGameService {
 		return gameRepository.save(game);
 	}
 	
-	public Game findById(Long id) {
-		return gameRepository.findById(id).orElseThrow(() -> {
+	public Map<String, GameDto> findById(Long id) {
+		var game = gameRepository.findById(id).orElseThrow(() -> {
 			throw new ObjectNotFoundException("Object not found: "+ id + " Type: "+ Game.class);
 		});
+		
+		var dto = createDtoFromGame(game);
+		
+		return dto;
+	}
+	
+	private Map<String, GameDto> createDtoFromGame(Game game) {
+		
+		// Gets array out of player names
+		var playerNames = game.getPlayers()
+				.stream()
+				.map((p) -> p.getName())
+				.toArray(String[]::new);
+		
+		Map<String, Long> mapPlayersAndKills = new HashMap<>();
+		game.getKillsByPlayers().forEach((k) -> {
+			mapPlayersAndKills.put(k.getPlayer().getName(), k.getKills());
+		});		
+		
+		var gameDto = GameDto.builder()
+				.players(playerNames)
+				.kills(mapPlayersAndKills)
+				.totalKills(game.getTotalKills())
+				.build();
+		
+		Map<String, GameDto> responseObject = new HashMap<>();
+		
+		var index = "game_"+ game.getId();
+		
+		responseObject.put(index, gameDto);
+		
+		return responseObject;
 	}
 }
