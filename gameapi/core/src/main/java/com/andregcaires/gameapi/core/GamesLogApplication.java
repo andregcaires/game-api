@@ -70,7 +70,7 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            
 		            if (line.contains(Keys.INITGAME)) {
 		            	gameInfo = gameInfoService.buildGame(line);
-		            	logger.info("A new game has been initialized");
+		            	logger.info("A new game has been captured from log file: "+ gameInfo.toString());
 		            }
 		            else if (line.contains(Keys.CLIENTUSERINFOCHANGED)) {
 		            	var player = playerService.getClientUserInfo(line);

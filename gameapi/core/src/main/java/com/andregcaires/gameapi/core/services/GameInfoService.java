@@ -52,14 +52,12 @@ public class GameInfoService implements IGameInfoService {
     			.gameType(map.get("g_gametype"))
     			.hostName(map.get("sv_hostname"))
     			.maxRate(Integer.parseInt(map.get("sv_maxRate")))
-    			.minRate(Integer.parseInt(map.get("sv_maxRate")))
+    			.minRate(Integer.parseInt(map.get("sv_minRate")))
     			.minPing(Integer.parseInt(map.get("sv_minPing")))
     			.maxPing(Integer.parseInt(map.get("sv_maxPing")))
     			.floodProtect(map.get("sv_floodProtect"))
     			.captureLimit(Integer.parseInt(map.get("capturelimit")))
     			.build();
-    	
-    	logger.info("Game has been captured from log file: "+ gameInfo.toString());
 		
 		return gameInfo;
 	}
