@@ -1,5 +1,6 @@
 package com.andregcaires.gameapi.core.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,15 @@ public class GameService implements IGameService {
 	
 	Logger logger = LoggerFactory.getLogger(GameService.class);
 	
-	public List<Game> findAll() {
-		return gameRepository.findAll();
+	public List<Map<String, GameDto>> findAll() {
+		var games = gameRepository.findAll();
+		
+		List<Map<String, GameDto>> mapList = new ArrayList<>();
+		games.forEach(g -> {
+			mapList.add(createDtoFromGame(g));
+		});
+		
+		return mapList;
 	}
 	
 	public Game createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills) {

@@ -18,7 +18,7 @@ public interface IGameService {
 	
 	Game insert(Game game);
 	
-	List<Game> findAll();
+	List<Map<String, GameDto>> findAll();
 	
 	Map<String, GameDto> findById(Long id);
 }
