@@ -63,7 +63,7 @@ public class GameService implements IGameService {
 		return dto;
 	}
 	
-	private Map<String, GameDto> createDtoFromGame(Game game) {
+	public Map<String, GameDto> createDtoFromGame(Game game) {
 		
 		// Gets array out of player names
 		var playerNames = game.getPlayers()

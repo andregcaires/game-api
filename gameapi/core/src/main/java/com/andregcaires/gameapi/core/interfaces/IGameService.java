@@ -21,4 +21,6 @@ public interface IGameService {
 	List<Map<String, GameDto>> findAll();
 	
 	Map<String, GameDto> findById(Long id);
+	
+	Map<String, GameDto> createDtoFromGame(Game game);
 }

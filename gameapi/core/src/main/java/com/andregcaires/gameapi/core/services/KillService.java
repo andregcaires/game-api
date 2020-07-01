@@ -38,8 +38,6 @@ public class KillService implements IKillService {
 				.reason(reason)
 				.build();
 		
-		logger.info("Kill record has been captured from log file: "+ kill.toString());
-		
 		return kill;		
 	}
 	
@@ -88,14 +86,14 @@ public class KillService implements IKillService {
 		return killRepository.saveAll(list);
 	}
 	
-	private long getTotalPlayerKills(String playerName, List<Kill> killsList) {
+	public long getTotalPlayerKills(String playerName, List<Kill> killsList) {
     	return killsList
 				.stream()
 				.filter((t) -> t.getKillerPlayer().equals(playerName))
 				.count();
 	}
 	
-	private long getPlayerKillsByWorld(String playerName, List<Kill> killsList) {
+	public long getPlayerKillsByWorld(String playerName, List<Kill> killsList) {
     	return killsList
 				.stream()
 				.filter((t) -> t.getKilledPlayer().equals(playerName) 

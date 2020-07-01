@@ -80,7 +80,9 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            	}
 		            }
 		            else if (line.contains(Keys.KILL)) {
-		            	killsList.add(killService.getKillRecord(line));
+		            	var kill = killService.getKillRecord(line);
+		            	killsList.add(kill);
+		            	logger.info("Kill record has been captured from log file: "+ kill.toString());
 		            }
 		            else if (line.contains(Keys.SHUTDOWNGAME)) {
 		            	
