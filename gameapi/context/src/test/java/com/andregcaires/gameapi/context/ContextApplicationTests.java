@@ -1,13 +1,7 @@
 package com.andregcaires.gameapi.context;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
+/*
+ * No use for unit tests in this maven module
+ * */
 class ContextApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
 }
