@@ -22,4 +22,6 @@ public class Keys {
 	
 	public static final String EXIT = "Exit:";
 	
+	public static final String ONLYLINES = "--------------------------------------------------";
+	
 }
