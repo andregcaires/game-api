@@ -32,20 +32,23 @@ public class PlayerService implements IPlayerService {
     	
     	var foundPlayerName = splitUpLineArray[1];
     	
-    	var player = findPlayerByName(foundPlayerName);
+    	var player = Player.builder()
+    			.name(foundPlayerName)
+    			.build();	
+    	
+    	return player;
+	}
+	
+	public Player insertPlayerIfNotExists(Player newPlayer) {
+		
+    	var player = findPlayerByName(newPlayer.getName());
     	
     	if (player == null) {
-    		
-    		player = Player.builder()
-    				.name(foundPlayerName)
-    				.build();
-    		
-    		player = insertNewPlayer(player);
-    	}    	
+    			
+    		player = insertNewPlayer(newPlayer);
+    	}
     	
-    	logger.info("Game has been captured from log file: "+ player.toString());
-    	System.out.println(player.toString());
-    	return player;
+    	return player;  
 	}
 	
 	public Player findPlayerByName(String playerName) {

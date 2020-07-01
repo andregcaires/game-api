@@ -8,4 +8,6 @@ import com.andregcaires.gameapi.domain.entities.Player;
 public interface IPlayerService {
 
 	Player getClientUserInfo(String line);
+	
+	Player insertPlayerIfNotExists(Player newPlayer);
 }

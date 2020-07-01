@@ -42,7 +42,7 @@ public class GameService implements IGameService {
 		
 		var game = Game.builder()
 				.totalKills(totalKills)
-				//.killsByPlayers(killsByPlayers)
+				.killsByPlayers(killsByPlayers)
 				.players(players)
 				.build();
 		

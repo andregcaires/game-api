@@ -76,9 +76,13 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            else if (line.contains(Keys.CLIENTUSERINFOCHANGED)) {
 		            	var player = playerService.getClientUserInfo(line);
 		            	
+		            	// if found player not exists in database, inserts it
+		            	player = playerService.insertPlayerIfNotExists(player);
+		            	
 		            	if (!playerList.contains(player)) {
 		            		playerList.add(player);		            		
 		            	}
+		            	logger.info("Game has been captured from log file: "+ player.toString());
 		            }
 		            else if (line.contains(Keys.KILL)) {
 		            	var kill = killService.getKillRecord(line);
