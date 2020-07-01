@@ -52,6 +52,7 @@ public class GamesLogApplication implements IGamesLogApplication {
 		List<Kill> killsList = new ArrayList<>();
 		List<KillsByPlayer> killsByPlayerList = new ArrayList<>();
 		Set<Player> playerList = new HashSet<>();
+		long totalGameKills = 0;
 		
 		GameInfo gameInfo = new GameInfo();;
 		InputStream inputStream;
@@ -82,34 +83,35 @@ public class GamesLogApplication implements IGamesLogApplication {
 		            else if (line.contains(Keys.KILL)) {
 		            	var kill = killService.getKillRecord(line);
 		            	killsList.add(kill);
+		            	totalGameKills++;
 		            	logger.info("Kill record has been captured from log file: "+ kill.toString());
 		            }
 		            else if (line.contains(Keys.SHUTDOWNGAME)) {
 		            	
 		            	logger.info("A game has been shutdown");
 		            	
-		            	var totalGameKillsWrapper = killService
+		            	killsByPlayerList = killService
 		            			.getTotalAndIndividualKills(playerList, killsList);
 		            	
-		            	var totalGameKills = totalGameKillsWrapper.getKillsByPlayerList();
-		            	
 		            	var game = gameService.createNewGame(playerList, 
-		            			totalGameKills, 
-		            			totalGameKillsWrapper.getTotalKills());
+		            			killsByPlayerList, 
+		            			totalGameKills);
 		            	
-		            	totalGameKills.forEach(item -> item.setGame(game));
+		            	killsByPlayerList.forEach(item -> item.setGame(game));
 		            	
 		            	gameInfo.setGame(game);
 		            	
 		            	// Save both game and kills by player
 	            		gameService.insert(game);
-		            	killService.insert(totalGameKills);
+		            	killService.insert(killsByPlayerList);
 		            	gameInfoService.insert(gameInfo);
 		            	
 		            	// Clears lists used for current game
 		            	killsByPlayerList.clear();
 		            	killsList.clear();
 		            	playerList.clear();
+		            	
+		            	totalGameKills = 0;
 		            	
 		            }
 		        }

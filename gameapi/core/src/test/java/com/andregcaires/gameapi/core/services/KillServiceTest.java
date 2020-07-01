@@ -14,6 +14,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import com.andregcaires.gameapi.core.interfaces.IKillService;
 import com.andregcaires.gameapi.domain.entities.Kill;
+import com.andregcaires.gameapi.domain.entities.KillsByPlayer;
 import com.andregcaires.gameapi.domain.entities.Player;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -37,9 +38,21 @@ public class KillServiceTest {
 	@Test
 	public void mustGetTotalAndIndividualPlayerKills() {
 		
-		var wrapper = killService.getTotalAndIndividualKills(players, killsList);
+		var killsByPlayer = killService.getTotalAndIndividualKills(players, killsList);
 		
-		Assertions.assertEquals(killsList.size(), wrapper.getTotalKills());
+		KillsByPlayer objNoWorldKills = killsByPlayer
+				.stream()
+				.filter((item) -> item.getPlayer().getName() == "Worf, son of Mogh")
+				.findFirst().orElseThrow();
+		
+		Assertions.assertEquals(3L, objNoWorldKills.getKills());
+		
+		KillsByPlayer objWithWorldKills = killsByPlayer
+				.stream()
+				.filter((item) -> item.getPlayer().getName() == "Tasha Yar")
+				.findFirst().orElseThrow();
+		
+		Assertions.assertEquals(0, objWithWorldKills.getKills());
 	}
 	
 	@Test

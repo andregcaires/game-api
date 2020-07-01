@@ -14,7 +14,6 @@ import com.andregcaires.gameapi.core.interfaces.IKillService;
 import com.andregcaires.gameapi.domain.entities.Kill;
 import com.andregcaires.gameapi.domain.entities.KillsByPlayer;
 import com.andregcaires.gameapi.domain.entities.Player;
-import com.andregcaires.gameapi.domain.utilities.TotalGameKillsWrapper;
 
 @Service
 public class KillService implements IKillService {
@@ -41,7 +40,7 @@ public class KillService implements IKillService {
 		return kill;		
 	}
 	
-	public TotalGameKillsWrapper getTotalAndIndividualKills(Set<Player> playerList, List<Kill> killsList) {
+	public List<KillsByPlayer> getTotalAndIndividualKills(Set<Player> playerList, List<Kill> killsList) {
 		
 		long individualKills = 0, totalKills = 0;
 		
@@ -70,16 +69,7 @@ public class KillService implements IKillService {
     		
     	}
     	
-    	/*
-    	 * In order to avoid iterate over playerList multiple times,
-    	 * this Wrapper class is used to encapsulate both totalkills
-    	 * and total kills by player
-    	 * */
-    	var totalGameKills = new TotalGameKillsWrapper();
-    	totalGameKills.getKillsByPlayerList().addAll(killsByPlayerList);
-    	totalGameKills.setTotalKills(totalKills);
-    	
-    	return totalGameKills;
+    	return killsByPlayerList;
 	}
 	
 	public List<KillsByPlayer> insert(List<KillsByPlayer> list) {
