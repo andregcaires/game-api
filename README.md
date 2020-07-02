@@ -36,18 +36,18 @@ Este projeto requer a instalação do [Docker](https://www.docker.com/) ou de al
 
 ### Ambiente Windows - JDK 11
 
-Executar o arquivo app-windows-run.cmd, localizado na raiz do projeto
+Executar o arquivo app-windows-run.cmd, localizado na raiz do repositório
 
 ### Ambiente Windows - Docker
 
-Executar o arquivo docker-windows-cmd.sh, localizado na raiz do projeto
+Executar o arquivo docker-windows-cmd.sh, localizado na raiz do repositório
 
 ### Ambiente Linux - JDK 11
 
-Executar o arquivo app-linux-run.sh, localizado na raiz do projeto
+Executar o arquivo app-linux-run.sh, localizado na raiz do repositório
 
 ### Ambiente Linux - Docker
 
-Executar o arquivo docker-linux-run.sh, localizado na raiz do projeto
+Executar o arquivo docker-linux-run.sh, localizado na raiz do repositório
 
 [games.log]: https://github.com/andregcaires/game-api/blob/master/gameapi/webapp/src/main/resources/games.log
