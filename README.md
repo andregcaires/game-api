@@ -30,4 +30,13 @@ Projeto desenvolvido em Java 11 que realiza o parse do arquivo games.log, gerado
   
 ## Execução do projeto
 
-TODO
+Este projeto requer a instalação do Docker ou de alguma distribuição do JDK 11 (para desenvolvimento foi utilizada a distribuição Amazon Corretto OpenJDK)
+
+### Ambiente Windows - JDK 11
+
+Basta executar o arquivo app-windows-run.cmd, localizado na raiz do projeto
+
+### Ambiente Linux - Docker
+
+Basta executar o arquivo docker-run.sh, localizado na rais do projeto
+
