@@ -44,7 +44,7 @@ public class Game implements Serializable {
 	private Set<Player> players = new HashSet<>();
 	
 	@Singular
-	@OneToMany(mappedBy = "game")
+	@OneToMany(mappedBy = "id.game")
 	private Set<KillsByPlayer> killsByPlayers = new HashSet<>();
 	
 	private long totalKills;

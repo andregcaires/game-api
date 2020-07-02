@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
-//@Embeddable
+@Embeddable
 @Data
 public class KillsByPlayerPK implements Serializable {
 

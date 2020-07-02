@@ -2,16 +2,10 @@ package com.andregcaires.gameapi.domain.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.ToString;
 
 /*
  * @Data was not used in this class because the getGame() method
@@ -23,46 +17,35 @@ public class KillsByPlayer implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "player_id")
-	@ToString.Exclude
-	private Player player;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "game_id")
-	@ToString.Exclude
-	private Game game;	
+	@EmbeddedId
+	private KillsByPlayerPK id = new KillsByPlayerPK();
 	
 	private long kills;
 
-	public Long getId() {
+	@JsonIgnore
+	public KillsByPlayerPK getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(KillsByPlayerPK id) {
 		this.id = id;
 	}
 
 	public Player getPlayer() {
-		return player;
+		return id.getPlayer();
 	}
 
 	public void setPlayer(Player player) {
-		this.player = player;
+		this.id.setPlayer(player);
 	}
 
 	@JsonIgnore
 	public Game getGame() {
-		return game;
+		return id.getGame();
 	}
 
 	public void setGame(Game game) {
-		this.game = game;
+		this.id.setGame(game);
 	}
 
 	public long getKills() {
