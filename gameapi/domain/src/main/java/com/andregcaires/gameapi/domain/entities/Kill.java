@@ -8,9 +8,9 @@ import lombok.Data;
 public class Kill {
 
 	private String killerPlayer;
-	
+
 	private String killedPlayer;
-	
+
 	private String reason;
-	
+
 }

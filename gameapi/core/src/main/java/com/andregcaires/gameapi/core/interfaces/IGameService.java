@@ -15,12 +15,12 @@ import com.andregcaires.gameapi.domain.entities.Player;
 public interface IGameService {
 
 	Game createNewGame(Set<Player> players, List<KillsByPlayer> killsByPlayers, long totalKills);
-	
+
 	Game insert(Game game);
-	
+
 	List<Map<String, GameDto>> findAll();
-	
+
 	Map<String, GameDto> findById(Long id);
-	
+
 	Map<String, GameDto> createDtoFromGame(Game game);
 }

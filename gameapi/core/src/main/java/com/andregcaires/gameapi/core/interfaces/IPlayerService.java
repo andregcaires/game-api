@@ -7,7 +7,7 @@ import com.andregcaires.gameapi.domain.entities.Player;
 @Service
 public interface IPlayerService {
 
-	Player getClientUserInfo(String line);
-	
+	Player parseClientUserInfoLine(String line);
+
 	Player insertPlayerIfNotExists(Player newPlayer);
 }

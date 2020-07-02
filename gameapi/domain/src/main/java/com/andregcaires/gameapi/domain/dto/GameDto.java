@@ -13,8 +13,8 @@ public class GameDto {
 
 	@JsonProperty("total_kills")
 	private long totalKills;
-	
+
 	private String[] players;
-	
+
 	private Map<String, Long> kills;
 }

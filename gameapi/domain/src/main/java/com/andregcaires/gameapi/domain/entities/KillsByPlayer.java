@@ -14,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * */
 @Entity
 public class KillsByPlayer implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private KillsByPlayerPK id = new KillsByPlayerPK();
-	
+
 	private long kills;
 
 	@JsonIgnore
@@ -55,7 +55,5 @@ public class KillsByPlayer implements Serializable {
 	public void setKills(long kills) {
 		this.kills = kills;
 	}
-	
-	
-	
+
 }

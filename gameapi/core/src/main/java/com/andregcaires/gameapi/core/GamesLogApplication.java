@@ -60,13 +60,13 @@ public class GamesLogApplication implements IGamesLogApplication {
 
 				if (line.contains(Keys.INITGAME)) {
 
-					gameInfo = gameInfoService.buildGame(line);
+					gameInfo = gameInfoService.parseInitGameLine(line);
 
 					logger.info("A new game has been captured from log file: " + gameInfo.toString());
 
 				} else if (line.contains(Keys.CLIENTUSERINFOCHANGED)) {
 
-					var player = playerService.getClientUserInfo(line);
+					var player = playerService.parseClientUserInfoLine(line);
 
 					// if found player not exists in database, inserts it
 					player = playerService.insertPlayerIfNotExists(player);
@@ -79,7 +79,7 @@ public class GamesLogApplication implements IGamesLogApplication {
 
 				} else if (line.contains(Keys.KILL)) {
 
-					var kill = killService.getKillRecord(line);
+					var kill = killService.parseKillLine(line);
 
 					killsList.add(kill);
 
@@ -88,6 +88,12 @@ public class GamesLogApplication implements IGamesLogApplication {
 					logger.info("Kill record has been captured from log file: " + kill.toString());
 
 				} else if (line.contains(Keys.SHUTDOWNGAME) || (gameInfo != null && line.contains(Keys.ONLYLINES))) {
+
+					/*
+					 * Since there is a game in the logs file that does not finish with Shutdown, it
+					 * checks for separation lines when there's a not finished game (gameInfo !=
+					 * null)
+					 */
 
 					logger.info("A game has been shutdown");
 
@@ -121,7 +127,7 @@ public class GamesLogApplication implements IGamesLogApplication {
 		killService.insert(killsByPlayerList);
 		gameInfoService.insert(gameInfo);
 
-		// Clears lists and variables used for current game
+		// Clears lists, objects and variables used for current game
 		killsByPlayerList.clear();
 		killsList.clear();
 		playerList.clear();

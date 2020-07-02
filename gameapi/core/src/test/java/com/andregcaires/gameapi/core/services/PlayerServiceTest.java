@@ -12,25 +12,25 @@ import com.andregcaires.gameapi.core.interfaces.IPlayerService;
 public class PlayerServiceTest {
 
 	private IPlayerService playerService;
-	
+
 	@BeforeAll
 	void setup() {
-		
+
 		playerService = new PlayerService();
 	}
-	
+
 	@Test
 	public void mustGetClientUserInfoFromStringLine() {
-		
+
 		// given
 		String line = " 21:53 ClientUserinfoChanged: 3 n\\Mocinha\\t\\0\\model\\sarge\\hmodel\\sarge\\g_redteam\\\\g_blueteam\\\\c1\\4\\c2\\5\\hc\\95\\w\\0\\l\\0\\tt\\0\\tl\\0";
-		
+
 		// when
-		var player = playerService.getClientUserInfo(line);
-		
-		// then		
+		var player = playerService.parseClientUserInfoLine(line);
+
+		// then
 		Assertions.assertNotNull(player);
 		Assertions.assertEquals("Mocinha", player.getName());
 	}
-	
+
 }
