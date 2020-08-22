@@ -42,6 +42,11 @@ Executar o arquivo app-windows-run.cmd, localizado na raiz do repositório
 
 Executar o arquivo docker-windows-cmd.sh, localizado na raiz do repositório
 
+### Ambiente Windows - Execução Manual JDK 11
+
+* Na raiz do projeto (pasta gameapi), executar o comando: mvnw clean package
+* Em seguida, executar o comando: java -jar webapp\target\webapp-0.0.1-SNAPSHOT.jar
+
 ### Ambiente Linux - JDK 11
 
 Executar o arquivo app-linux-run.sh, localizado na raiz do repositório
@@ -49,5 +54,16 @@ Executar o arquivo app-linux-run.sh, localizado na raiz do repositório
 ### Ambiente Linux - Docker
 
 Executar o arquivo docker-linux-run.sh, localizado na raiz do repositório
+
+### Ambiente Linux - Execução Manual JDK 11
+
+* Na raiz do projeto (pasta gameapi), executar o comando: ./mvnw clean package
+* Em seguida, executar o comando: java -jar webapp/target/webapp-0.0.1-SNAPSHOT.jar
+
+### Docker - Execução manual (qualquer ambiente)
+
+#### Executar os seguintes comandos em ordem:
+* docker image build -t games-log-parser-api .
+* docker container run --name gameapi games-log-parser-api
 
 [games.log]: https://github.com/andregcaires/game-api/blob/master/gameapi/webapp/src/main/resources/games.log
