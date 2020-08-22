@@ -24,11 +24,11 @@ Projeto desenvolvido em Java 11 que realiza o parse do arquivo [games.log], gera
   
  Após o processo de parse e persistência em um banco de dados em memória (foi utilizado H2), o projeto expõe uma API REST na porta 8080 com o endpoint /games para consulta dos dados das partidas. No console / prompt de comando, é exibida uma mensagem informando o endpoint do Swagger com a documentação da API, com os seguintes métodos: 
  
-| Verbo HTTP  | Endpoint            | Retorno                                                |   |   |
-|-------------|---------------------|--------------------------------------------------------|---|---|
-| GET         | /games              | retorna uma lista com um resumo de todas as partidas   |   |   |
-| GET         | /games/{id}         | retorna um resumo da partida com o ID informado        |   |   |
-| GET         | /games/{id}/details | retorna dados detalhados da partida com o ID informado |   |   |
+| Verbo HTTP  | Endpoint            | Retorno                                                |
+|-------------|---------------------|--------------------------------------------------------|
+| GET         | /games              | retorna uma lista com um resumo de todas as partidas   |
+| GET         | /games/{id}         | retorna um resumo da partida com o ID informado        |
+| GET         | /games/{id}/details | retorna dados detalhados da partida com o ID informado |
 
 ## Execução do projeto
 
