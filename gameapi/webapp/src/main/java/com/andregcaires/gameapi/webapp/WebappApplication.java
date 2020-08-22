@@ -38,6 +38,7 @@ public class WebappApplication implements CommandLineRunner {
 	private ConfigurableApplicationContext context;
 
 	private final String SWAGGER_ENDPOINT = "/swagger-ui.html";
+	private final String ACTUATOR_ENDPOINT = "/actuator";
 	private final String HTTP_PREFIX = "http://";
 
 	Logger logger = LoggerFactory.getLogger(WebappApplication.class);
@@ -58,16 +59,16 @@ public class WebappApplication implements CommandLineRunner {
 
 			logger.info("Parsing process complete");
 
-			StringBuilder sb = new StringBuilder();
-			sb.append("Please access ");
-			sb.append(HTTP_PREFIX);
-			sb.append(InetAddress.getLocalHost().getHostAddress());
-			sb.append(":");
-			sb.append(environment.getProperty("server.port"));
-			sb.append(SWAGGER_ENDPOINT);
-			sb.append(" for API documentation");
-
-			logger.info(sb.toString());
+			StringBuilder logMessage = new StringBuilder();
+			logMessage.append("Please access ");
+			
+			logMessage.append(HTTP_PREFIX);
+			logMessage.append(InetAddress.getLocalHost().getHostAddress());
+			logMessage.append(":");
+			logMessage.append(environment.getProperty("server.port"));
+			
+			logger.info(logMessage.toString() + SWAGGER_ENDPOINT + " for API documentation");
+			logger.info(logMessage.toString() + ACTUATOR_ENDPOINT + " for health check info");
 
 		} catch (Exception err) {
 			logger.error("An error has ocurred: " + err.getMessage());
