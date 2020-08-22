@@ -10,5 +10,5 @@ import com.andregcaires.gameapi.domain.entities.GameInfo;
 @Repository
 public interface GameInfoRepository extends JpaRepository<GameInfo, Long> {
 
-	public Optional<GameInfo> findByGame_Id(final Long id);
+	public Optional<GameInfo> findById(final Long id);
 }

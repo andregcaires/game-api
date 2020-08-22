@@ -53,7 +53,7 @@ public class GameInfoService implements IGameInfoService {
 	}
 
 	public GameInfo findByGameId(Long id) {
-		return gameInfoRepository.findByGame_Id(id).orElseThrow(() -> {
+		return gameInfoRepository.findById(id).orElseThrow(() -> {
 			throw new ObjectNotFoundException("Object not found: " + id + " Type: " + GameInfo.class);
 		});
 	}
