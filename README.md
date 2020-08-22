@@ -22,13 +22,16 @@ Projeto desenvolvido em Java 11 que realiza o parse do arquivo [games.log], gera
  
   Observação: no arquivo há uma partida que se encerra sem o Shutdown ser registrado, portanto o processo de Shutdown também é realizado quando o parser encontra uma linha com apenas traços (ex: "-------) e quando um jogo estiver iniciado
   
- Após o processo de parse e persistência em um banco de dados em memória (foi utilizado H2), o projeto expõe uma API REST na porta 8080 com o endpoint /games para consulta dos dados das partidas. No console / prompt de comando, é exibida uma mensagem informando o endpoint do Swagger com a documentação da API, com os seguintes métodos: 
+ Após o processo de parse e persistência em um banco de dados em memória (foi utilizado H2), o projeto expõe uma API REST na porta 8080 com o endpoint /games para consulta dos dados das partidas. No console e no arquivo de log, é exibida uma mensagem informando o endpoint do Swagger com a documentação da API, além do endpoint do Actuator, para informações sobre a saúde da aplicação (Health Check). 
  
 | Verbo HTTP  | Endpoint            | Retorno                                                |
 |-------------|---------------------|--------------------------------------------------------|
 | GET         | /games              | retorna uma lista com um resumo de todas as partidas   |
 | GET         | /games/{id}         | retorna um resumo da partida com o ID informado        |
 | GET         | /games/{id}/details | retorna dados detalhados da partida com o ID informado |
+| GET         | /actuator           | retorna links com informações sobre health check       |
+| GET         | /swagger-ui.html    | exibe documentação da aplicação                        |
+
 
 ## Execução do projeto
 
